@@ -16,51 +16,29 @@ public class StateTwo implements State {
 
     @Override
     public void process(char c, Calculator calculator) {
-        System.err.println("state two start ======================== ");
-        System.err.println("c is : " + c);
-        System.err.println("n is : " + calculator.getN());
-        System.err.println("t is : " + calculator.getT());
-        System.err.println("l is : " + calculator.getL());
 
-
-
-        if (Character.isDigit(c)) {
+        if(Character.isDigit(c)){
             calculator.setN(calculator.getN() * 10 + Integer.parseInt(String.valueOf(c)));
+        }
+        else if (c == '+' || c == '-' && c != '\n')
+        {
+            calculator.computeTotal(calculator);
 
-        } else if (c == '+' || c == '-' && c != '$') {
+            calculator.setN(0);
+            calculator.setL(c);
+            calculator.setCurrentState(StateThree.getInstance());
 
-            if (calculator.getL() == '+' || calculator.getL()  == '-') {
-
-                if (calculator.getL() == '+') {
-                    calculator.setT(calculator.getT() + calculator.getN());
-                } else {
-                    calculator.setT(calculator.getT() - calculator.getN());
-
-                }
-
-                calculator.setN(0);
-                calculator.setL(c);
-                calculator.setCurrentState(StateOne.getInstance());
-            }
-
-
-        } else if ( c == '$') {
-
-            System.err.println("state two $");
-
+        }
+        else if ( c == '\n')
+        {
             if (calculator.getL() == '+' || calculator.getL() == '-') {
 
-                if (calculator.getL() == '+') {
-                    calculator.setT(calculator.getT() + calculator.getN());
-                } else {
-                    calculator.setT(calculator.getT() - calculator.getN());
-
-                }
+                calculator.computeTotal(calculator);
 
                 calculator.setCurrentState(StateFinal.getInstance());
             }
+        } else {
+            calculator.setCurrentState(Error.getInstance());
         }
-
     }
-
 }

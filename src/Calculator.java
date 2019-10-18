@@ -19,6 +19,14 @@ public class Calculator {
         return instance;
     }
 
+    public void computeTotal(Calculator calculator) {
+        if (calculator.getL() == '+') {
+            calculator.setT(calculator.getT() + calculator.getN());
+        } else {
+            calculator.setT(calculator.getT() - calculator.getN());
+        }
+    }
+
 
 
     private State currentState = StateZero.getInstance();

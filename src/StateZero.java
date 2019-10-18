@@ -12,31 +12,19 @@ public class StateZero implements State {
             instance = new StateZero();
         }
         return instance;
-
     }
 
     @Override
     public void process(char c, Calculator calculator) {
-        System.err.println("state zero start ======================== ");
-        System.err.println("c is : " + c);
-        System.err.println("n is : " + calculator.getN());
-        System.err.println("t is : " + calculator.getT());
-        System.err.println("l is : " + calculator.getL());
-
         if(Character.isDigit(c) && c != '0' ){
             calculator.setT(0);
             calculator.setN(Integer.parseInt(String.valueOf(c)));
             calculator.setL('+');
-
             calculator.setCurrentState(StateOne.getInstance());
-
+        } else if (c == '\n') {
+            calculator.setCurrentState(StateFinal.getInstance());
+        } else {
+            calculator.setCurrentState(Error.getInstance());
         }
-
-        System.err.println("c is : " + c);
-        System.err.println("n is : " + calculator.getN());
-        System.err.println("t is : " + calculator.getT());
-        System.err.println("l is : " + calculator.getL());
-        System.err.println("state zero finish ======================== ");
-
     }
 }

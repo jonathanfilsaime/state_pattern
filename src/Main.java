@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class Main {
 
@@ -6,15 +6,20 @@ public class Main {
 
         Calculator calculator = Calculator.getInstance();
 
-        String readThisString = "100 + 1 - 30 + 1 + 8 + 20 - 100 - 100  $";
+        Scanner scanner = new Scanner(System.in);
 
+        //  prompt for the user's name
+        System.out.print("Enter an equation: ");
+
+        // get their input as a String
+        String readThisString = scanner.nextLine();
+        System.err.println(readThisString);
+
+        readThisString = readThisString.concat("\n");
         char[] a = readThisString.toCharArray();
 
         for (char c : a) {
-
             calculator.getCurrentState().process(c, calculator);
-
-
         }
 
         System.err.println("final n value " + calculator.getN());

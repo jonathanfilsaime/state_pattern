@@ -16,8 +16,5 @@ public class StateFinal implements State {
 
     @Override
     public void process(char c, Calculator calculator) {
-        System.err.println(calculator.getN());
-        System.err.println(calculator.getT());
-        System.err.println(calculator.getL());
     }
 }
