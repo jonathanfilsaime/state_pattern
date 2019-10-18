@@ -19,11 +19,12 @@ public class StateTwo implements State {
 
         if(Character.isDigit(c)){
             calculator.setN(calculator.getN() * 10 + Integer.parseInt(String.valueOf(c)));
+        }else if (c == ' '){
+
         }
         else if (c == '+' || c == '-' && c != '\n')
         {
             calculator.computeTotal(calculator);
-
             calculator.setN(0);
             calculator.setL(c);
             calculator.setCurrentState(StateThree.getInstance());
@@ -31,13 +32,9 @@ public class StateTwo implements State {
         }
         else if ( c == '\n')
         {
-            if (calculator.getL() == '+' || calculator.getL() == '-') {
-
-                calculator.computeTotal(calculator);
-
-                calculator.setCurrentState(StateFinal.getInstance());
-            }
+            calculator.computeFinalTotal(calculator);
         } else {
+            calculator.setL(c);
             calculator.setCurrentState(Error.getInstance());
         }
     }

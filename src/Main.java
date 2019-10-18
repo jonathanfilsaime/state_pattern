@@ -4,25 +4,32 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Calculator calculator = Calculator.getInstance();
 
-        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("Enter an operation: ");
 
-        //  prompt for the user's name
-        System.out.print("Enter an equation: ");
+            Calculator calculator = Calculator.getInstance();
 
-        // get their input as a String
-        String readThisString = scanner.nextLine();
-        System.err.println(readThisString);
+            Scanner scanner = new Scanner(System.in);
 
-        readThisString = readThisString.concat("\n");
-        char[] a = readThisString.toCharArray();
+            String readThisString = scanner.nextLine();
+            System.out.println(readThisString);
 
-        for (char c : a) {
-            calculator.getCurrentState().process(c, calculator);
+            readThisString = readThisString.concat("\n");
+            char[] a = readThisString.toCharArray();
+
+
+            for (char c : a) {
+                calculator.getCurrentState().process(c, calculator);
+            }
+
+            if(calculator.getL() != 'E'){
+                System.out.println("Total = " + calculator.getT());
+            }
+
+
+            calculator.setCurrentState(StateRestart.getInstance());
+            calculator.getCurrentState().process(' ', calculator);
         }
-
-        System.err.println("final n value " + calculator.getN());
-        System.err.println("final t value " + calculator.getT());
     }
 }

@@ -21,9 +21,10 @@ public class StateZero implements State {
             calculator.setN(Integer.parseInt(String.valueOf(c)));
             calculator.setL('+');
             calculator.setCurrentState(StateOne.getInstance());
-        } else if (c == '\n') {
-            calculator.setCurrentState(StateFinal.getInstance());
+        } else if (c == ' '){
+
         } else {
+            calculator.setL(c);
             calculator.setCurrentState(Error.getInstance());
         }
     }

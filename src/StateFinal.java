@@ -16,5 +16,6 @@ public class StateFinal implements State {
 
     @Override
     public void process(char c, Calculator calculator) {
+
     }
 }

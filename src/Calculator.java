@@ -27,6 +27,15 @@ public class Calculator {
         }
     }
 
+    public void computeFinalTotal(Calculator calculator){
+        if (calculator.getL() == '+' || calculator.getL() == '-') {
+
+            calculator.computeTotal(calculator);
+
+            calculator.setCurrentState(StateFinal.getInstance());
+        }
+    }
+
 
 
     private State currentState = StateZero.getInstance();
