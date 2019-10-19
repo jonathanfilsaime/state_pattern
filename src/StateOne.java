@@ -14,15 +14,15 @@ public class StateOne implements State{
     @Override
     public void process(char c, Calculator calculator) {
         if(Character.isDigit(c)){
-            calculator.setN(calculator.getN() * 10 + Integer.parseInt(String.valueOf(c)));
+            calculator.setCurrentOperand(calculator.getCurrentOperand() * 10 + Integer.parseInt(String.valueOf(c)));
         }else if (c == ' '){
 
         }
         else if (c == '+' || c == '-' && c != '\n')
         {
-            calculator.setT(calculator.getN());
-            calculator.setN(0);
-            calculator.setL(c);
+            calculator.setTotal(calculator.getCurrentOperand());
+            calculator.setCurrentOperand(0);
+            calculator.setOperator(c);
             calculator.setCurrentState(StateTwo.getInstance());
         }
         else if ( c == '\n')
@@ -30,7 +30,7 @@ public class StateOne implements State{
             calculator.computeFinalTotal(calculator);
 
         } else {
-            calculator.setL(c);
+            calculator.setOperator(c);
             calculator.setCurrentState(Error.getInstance());
         }
     }

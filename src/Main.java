@@ -22,8 +22,8 @@ public class Main {
             }
 
             //If there are no errors print the total
-            if(calculator.getL() != 'E'){
-                System.out.println("Total = " + calculator.getT());
+            if(calculator.getOperator() != 'E'){
+                System.out.println("Total = " + calculator.getTotal());
             }
 
             //reset state and start over

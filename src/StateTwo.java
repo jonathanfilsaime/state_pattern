@@ -18,15 +18,15 @@ public class StateTwo implements State {
     public void process(char c, Calculator calculator) {
 
         if(Character.isDigit(c)){
-            calculator.setN(calculator.getN() * 10 + Integer.parseInt(String.valueOf(c)));
+            calculator.setCurrentOperand(calculator.getCurrentOperand() * 10 + Integer.parseInt(String.valueOf(c)));
         }else if (c == ' '){
 
         }
         else if (c == '+' || c == '-' && c != '\n')
         {
             calculator.computeTotal(calculator);
-            calculator.setN(0);
-            calculator.setL(c);
+            calculator.setCurrentOperand(0);
+            calculator.setOperator(c);
             calculator.setCurrentState(StateThree.getInstance());
 
         }
@@ -34,7 +34,7 @@ public class StateTwo implements State {
         {
             calculator.computeFinalTotal(calculator);
         } else {
-            calculator.setL(c);
+            calculator.setOperator(c);
             calculator.setCurrentState(Error.getInstance());
         }
     }

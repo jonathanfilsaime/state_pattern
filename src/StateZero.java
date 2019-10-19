@@ -17,14 +17,14 @@ public class StateZero implements State {
     @Override
     public void process(char c, Calculator calculator) {
         if(Character.isDigit(c) && c != '0' ){
-            calculator.setT(0);
-            calculator.setN(Integer.parseInt(String.valueOf(c)));
-            calculator.setL('+');
+            calculator.setTotal(0);
+            calculator.setCurrentOperand(Integer.parseInt(String.valueOf(c)));
+            calculator.setOperator('+');
             calculator.setCurrentState(StateOne.getInstance());
         } else if (c == ' '){
 
         } else {
-            calculator.setL(c);
+            calculator.setOperator(c);
             calculator.setCurrentState(Error.getInstance());
         }
     }

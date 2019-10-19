@@ -6,8 +6,6 @@ public class Calculator {
 
     private static Calculator instance = null;
 
-
-
     private Calculator() {
 
     }
@@ -19,56 +17,50 @@ public class Calculator {
         return instance;
     }
 
-    public void computeTotal(Calculator calculator) {
-        if (calculator.getL() == '+') {
-            calculator.setT(calculator.getT() + calculator.getN());
-        } else {
-            calculator.setT(calculator.getT() - calculator.getN());
-        }
-    }
-
-    public void computeFinalTotal(Calculator calculator){
-        if (calculator.getL() == '+' || calculator.getL() == '-') {
-
-            calculator.computeTotal(calculator);
-
-            calculator.setCurrentState(StateFinal.getInstance());
-        }
-    }
-
-
-
     private State currentState = StateZero.getInstance();
 
-    public State getCurrentState() {
-        return currentState;
-    }
+    public State getCurrentState() { return currentState; }
 
     public void setCurrentState(State currentState) {
         this.currentState = currentState;
     }
 
-    public int getT() {
+    public int getTotal() {
         return t;
     }
 
-    public void setT(int t) {
+    public void setTotal(int t) {
         this.t = t;
     }
 
-    public int getN() {
+    public int getCurrentOperand() {
         return n;
     }
 
-    public void setN(int n) {
+    public void setCurrentOperand(int n) {
         this.n = n;
     }
 
-    public char getL() {
+    public char getOperator() {
         return l;
     }
 
-    public void setL(char l) {
+    public void setOperator(char l) {
         this.l = l;
+    }
+
+    public void computeTotal(Calculator calculator) {
+        if (calculator.getOperator() == '+') {
+            calculator.setTotal(calculator.getTotal() + calculator.getCurrentOperand());
+        } else {
+            calculator.setTotal(calculator.getTotal() - calculator.getCurrentOperand());
+        }
+    }
+
+    public void computeFinalTotal(Calculator calculator){
+        if (calculator.getOperator() == '+' || calculator.getOperator() == '-') {
+            calculator.computeTotal(calculator);
+            calculator.setCurrentState(StateFinal.getInstance());
+        }
     }
 }
