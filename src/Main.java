@@ -8,7 +8,10 @@ public class Main {
 
             System.out.print("Enter an operation: ");
 
-            //collect user input
+            //collecting user input
+            //user must input a valid operation
+            //operand operator operand (i.e 1 + 3)
+            //user must press enter to compute the total
             Scanner scanner = new Scanner(System.in);
             String readThisString = scanner.nextLine();
             readThisString = readThisString.concat("\n");
@@ -17,6 +20,8 @@ public class Main {
             Calculator calculator = Calculator.getInstance();
 
             //The state machine starts from state zero
+            //loop all the input characters
+            //and change the state
             for (char c : a) {
                 calculator.getCurrentState().process(c, calculator);
             }
@@ -26,7 +31,9 @@ public class Main {
                 System.out.println("Total = " + calculator.getTotal());
             }
 
-            //reset state and start over
+            //after computing the total
+            //the state is reset and the
+            //program starts over
             calculator.setCurrentState(StateRestart.getInstance());
             calculator.getCurrentState().process(' ', calculator);
         }
